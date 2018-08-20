@@ -255,8 +255,6 @@
 	<!-- ******** RESUME ******** -->
 	<!-- ******** CONTACT ******** -->
 	<section id="contact">
- 
-		
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -265,53 +263,33 @@
 						</div>
 				</div>
 			</div>
-			<div class="row" id="ContenidoContact">
-				<div class="col-md-6">
-					<div id="about-subsection" class="contact-subsection">
-						<div class="col-md-12">
-						<h2 class="sub-section-title">WhatsApp <i class="fab fa-whatsapp" style="color:#a72f2f"></i></h2>
-						<p>+54 353 9 4821618</p>
-						</div>
-						<div class="col-md-12" id="itemsContact">
-						<h2 class="sub-section-title">Location <i class="fas fa-map-marker-alt" style="color:#a72f2f"></i></h2>
-						<p><a href="https://www.google.com.ar/maps/place/C%C3%B3rdoba/@-31.3993438,-64.3344291,11z/data=!3m1!4b1!4m5!3m4!1s0x9432985f478f5b69:0xb0a24f9a5366b092!8m2!3d-31.4200833!4d-64.1887761"> Córdoba Capital, Argentina</a></p>
-						</div>
-						<div class="col-md-12" id="itemsContact">
-							<h2 class="sub-section-title">Email <i class="far fa-envelope" style="color:#a72f2f"></i></h2>
-							<p>perrottafrancisco0@gmail.com</p>
-						</div> 
-					</div> 
-				</div>
-
-				<div class="col-md-6">
-					
+			<div class="row" id="ContenidoContact">				
+				<div class="col-md-12">
 					<div id="form-subsection" class="contact-subsection">
-						
-						<h2 class="sub-section-title">Contact Me</h2>
-        		<%= msg %>
+        		<h5><%= msg %></h5>
 						<form method="POST" action="send/en">
-
+							<div class="form-group">
+								<label class="nombre-label" for="Nombre">Name</label>
+								<input type="text" class="form-control" id="Nombre" name="Nombre">
+							</div> 
 							<div class="form-group">
 								<label class="email-label" for="Email">Email</label>
 								<input type="email" class="form-control" id="Email" name="Email">
+							</div> 
+							<div class="form-group" id="Phone1">
+								<label class="phone-label" for="Phone">Phone</label>
+								<input type="text" class="form-control" id="Phone" name="Phone">
 							</div> 
 							<div class="form-group">
 									<label class="message-label" for="Message">Message</label>
 									<textarea class="form-control" id="Message" rows="2" name="Message"></textarea>
 							</div>
-							
 								<button type="submit" class="btn btn-default pull-right btn-block">Send</button>
-
 						</form>
-
 					</div>
-
 				</div>
-
 			</div>
-
 		</div>
-
 	</section>
   <!-- ******** CONTACT ******** -->
 	<!-- ******** FOOTER ******** -->

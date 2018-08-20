@@ -1,88 +1,14 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-
-const bodyParser = require('body-parser'); 
-const nodemailer = require('nodemailer');
-
-/**************
- SETTINGS
- **************/
-// View engine setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-// Static folder
-app.use(express.static(path.join(__dirname, 'public')));
-// Body Parser Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-/**************
- ROUTES
- **************/
-
-app.get('/', (req, res) => {
-  res.render('index_en', { msg: ""});
-});
-app.get('/es', (req, res) => {
-  res.render('index_es', { msg: ""});
-});
-       app.post('/send/:idioma', (req, res) => {
-                let idioma = req.params.idioma;
-
-                const output = `
+const express=require('express'),app=express(),path=require('path'),bodyParser=require('body-parser'),nodemailer=require('nodemailer');app.set('view engine','ejs'),app.set('views',path.join(__dirname,'views')),app.use(express.static(path.join(__dirname,'public'))),app.use(bodyParser.urlencoded({extended:!1})),app.use(bodyParser.json()),app.get('/',(a,b)=>{b.render('index_en',{msg:''})}),app.get('/es',(a,b)=>{b.render('index_es',{msg:''})}),app.post('/send/:idioma',(a,b)=>{let c=a.params.idioma;const d=`
                   <p>You have a new contact request</p>
                   <h3>Contact Details</h3>
                   <ul>  
-                    <li>Email: ${req.body.Email}</li>
+                    <li>Email: ${a.body.Email}</li>
+                    <li>Nombre: ${a.body.Nombre}</li>
+                    <li>Telefono: ${a.body.Phone}</li>
                   </ul>
                   <h3>Message</h3>
-                  <p>${req.body.Message}</p>
-                `;
-                // create reusable transporter object using the default SMTP transport
-                let transporter = nodemailer.createTransport({
-                        service: 'gmail',
-                        port: 587,
-                        secure: false, // true for 465, false for other ports
-                        auth: {
-                            user: 'thefluxporter@gmail.com', // generated ethereal user
-                            pass: '1234567891011121314151617181920'  // generated ethereal password
-                        },
-                        tls:{
-                          rejectUnauthorized:false
-                        }
-                });
-                // setup email data with unicode symbols
-              let mailOptions = {
-                  from: `"Nodemailer Contact" <thefluxporter@gmail.com>`, // sender address
-                  to: 'perrottafrancisco0@gmail.com', // list of receivers
-                  subject: 'Node Contact Request', // Subject line
-                  text: req.body.Message, // plain text body
-                  html: output // html body
-              };
-
-              // send mail with defined transport object
-              transporter.sendMail(mailOptions, (error, info) => {
-                  if (error) {
-                      return console.log(error);
-                  }
-                  console.log('Message sent: %s', info.messageId);   
-                  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-              }); 
-              if(idioma == "es") {
-                 res.render('index_es', {msg:'Email enviado'})  
-               } else if(idioma == "en"){
-                 res.render('index_en', { msg: "Email has been sent"}); 
-               }   
-      })      
-/*************
-SERVIDOR
-*************/
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-        console.log(`
+                  <p>${a.body.Message}</p>
+                `;let e=nodemailer.createTransport({service:'gmail',port:587,secure:!1,auth:{user:'thefluxporter@gmail.com',pass:'1234567891011121314151617181920'},tls:{rejectUnauthorized:!1}}),f={from:`"Nodemailer Contact" <thefluxporter@gmail.com>`,to:'perrottafrancisco0@gmail.com',subject:'Node Contact Request',text:a.body.Message,html:d};e.sendMail(f,(g,h)=>{return g?console.log(g):void(console.log('Message sent: %s',h.messageId),console.log('Preview URL: %s',nodemailer.getTestMessageUrl(h)))}),'es'==c?b.render('index_es',{msg:'Email enviado !!!'}):'en'==c&&b.render('index_en',{msg:'Email has been sent !!!!'})});const PORT=process.env.PORT||3e3;app.listen(PORT,()=>{console.log(`
         # Server on port ${PORT},
         # http://localhost:${PORT}/
-        `)
-})
+        `)});
